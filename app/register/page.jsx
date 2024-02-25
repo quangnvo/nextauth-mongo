@@ -9,6 +9,8 @@ const Register = () => {
 	// The "useRouter" hook is used to access the router object
 	const router = useRouter()
 
+
+
 	/*#################
 	# The follwing code is only for setup INITIAL VARIABLES
 	#################*/
@@ -35,7 +37,6 @@ const Register = () => {
 	# FUNCTIONS --- useEffect
 	#################*/
 	useEffect(() => {
-		console.log("da vao useEffect")
 		// If the password and confirmPassword are not the same, we set isPasswordMatch to false
 		setIsPasswordMatch(formData.password === formData.confirmPassword)
 	}, [formData.password, formData.confirmPassword])
@@ -43,7 +44,6 @@ const Register = () => {
 	# End of FUNCTIONS --- useEffect
 	#################*/
 
-	console.log("isPasswordMatch ne: ", isPasswordMatch)
 
 	/*#################
 	# FUNCTIONS --- handleChange
@@ -80,8 +80,14 @@ const Register = () => {
 				registerForm.append(key, formData[key])
 			}
 
+			console.log("registerForm ne: ", registerForm)
+			console.log("registerForm ne: ", registerForm.get("username"))
+
+			const dummy = await fetch("https://dummyjson.com/products/1")
+			console.log("dummy ne: ", dummy)
+
 			// Then we send the POST request to the server to create a new user
-			const response = await fetch("/api/register", {
+			const response = await fetch("/api/register/", {
 				method: "POST",
 				body: registerForm
 			})

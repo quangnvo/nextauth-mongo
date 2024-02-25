@@ -16,6 +16,8 @@ export async function POST(req) {
         // The req object contains the data that was sent from the user from frontend
         const data = await req.formData();
 
+        console.log("data ne: ", data.get("username"))
+
         // Take information from the form
         const username = data.get("username");
         const email = data.get("email");
@@ -26,6 +28,8 @@ export async function POST(req) {
             // Use "NextResponse" to send a response to the frontend
             return NextResponse.json({ message: "No file uploaded" }, { status: 400 });
         }
+
+        console.log("da vao day")
 
         // Convert the file to a buffer
         // The buffer is a temporary storage for the file
