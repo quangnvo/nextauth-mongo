@@ -12,7 +12,7 @@ export const connectToDatabase = async () => {
     mongoose.set("strictQuery", true);
 
     if (isConnected) {
-        console.log("MongoDB is successfully connected");
+        console.log("MongoDB is successfully connected 🚀");
         return;
     }
 
@@ -28,7 +28,7 @@ export const connectToDatabase = async () => {
             useUnifiedTopology: true,
         })
         isConnected = true;
-        console.log("MongoDB is successfully connected");
+        console.log("MongoDB is successfully connected 🚀🚀🚀");
     } catch (err) {
         console.log(err)
     }

@@ -87,7 +87,7 @@ const Register = () => {
 			console.log("dummy ne: ", dummy)
 
 			// Then we send the POST request to the server to create a new user
-			const response = await fetch("/api/register/", {
+			const response = await fetch("http://localhost:3000//api/register/", {
 				method: "POST",
 				body: registerForm
 			})
