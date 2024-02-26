@@ -17,7 +17,7 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Password is required'],
     },
-    profileImage: {
+    profileImagePath: {
         type: String,
         required: [true, 'Profile image is required'],
     },

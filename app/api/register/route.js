@@ -68,10 +68,9 @@ export async function POST(req) {
             username,
             email,
             password: hashedPassword,
-            // profileImagePath: `/uploads/${file.name}`
             // This is the path to the file, if we save the file to the local storage, the path will be something like "/uploads/${file.name}"
             // If we save the file to the cloud, the path will be something like "https://s3.amazonaws.com/bucketName/uploads/${file.name}"
-            profileImage: `/uploads/${file.name}`
+            profileImagePath: `/uploads/${file.name}`
         });
 
         // After creating a new user, we save the user to the database
