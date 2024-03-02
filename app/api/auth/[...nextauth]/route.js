@@ -45,6 +45,7 @@ const handler = NextAuth({
 		// ROUTE HANDLER --- Callbacks --- signIn
 		// This callback is called when a user signs in
 		async signIn({ account, profile }) {
+			// This check === "google" is to check if the user is signing in with Google, and in frontend, we also use signIn("google") to sign in with Google
 			if (account.provider === 'google') {
 				try {
 					await connectToDatabase()
@@ -56,7 +57,8 @@ const handler = NextAuth({
 						user = await User.create({
 							email: profile.email,
 							username: profile.name,
-							profileImagePath: profile.image,
+							// In the google profile, the "picture" is the profile image of the user. This call "picture" but not "image" because it is the name of the field in the Google profile
+							profileImagePath: profile.picture,
 							wishlist: [],
 							cart: [],
 							order: [],
@@ -68,6 +70,8 @@ const handler = NextAuth({
 					console.log(err)
 				}
 			}
+			// This "return true" important, is to tell NextAuth that the user is authenticated
+			return true
 		},
 	}
 })
