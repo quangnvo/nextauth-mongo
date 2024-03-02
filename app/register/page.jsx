@@ -4,11 +4,11 @@ import "@styles/Register.scss"
 import { useState, useEffect } from "react"
 import { FcGoogle } from "react-icons/fc"
 import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 
 const Register = () => {
 	// The "useRouter" hook is used to access the router object
 	const router = useRouter()
-
 
 
 	/*#################
@@ -103,6 +103,18 @@ const Register = () => {
 	}
 	/*#################
 	# End of FUNCTIONS --- handleSubmit
+	#################*/
+
+
+	/*#################
+	# FUNCTIONS --- loginWithGoogle
+	#################*/
+	const loginWithGoogle = async () => {
+		// The "callbackUrl" is the URL that the user will be redirected to after the login is successful. This is already have in the signIn function
+		signIn("google", { callbackUrl: "/" })
+	}
+	/*#################
+	# End of FUNCTIONS --- loginWithGoogle
 	#################*/
 
 	/*#################
@@ -211,7 +223,12 @@ const Register = () => {
 				<button
 					type="button"
 					className="google"
-					onClick={() => { console.log("Login with Google") }}
+					// When the user click the button, we call the signIn function from next-auth/react to sign in with Google,
+					// The "signIn" function will redirect the user to the Google login page
+					// The "signIn" function we take from the api/auth/[...nextauth].js file
+					// Because the register page need to login, so user need to go to the login page and login
+					// But here, the user click on the login with google, so after login, the user can redirect to the home page
+					onClick={loginWithGoogle}
 				>
 					<p>Login with Google</p>
 					<FcGoogle />

@@ -36,7 +36,11 @@ const handler = NextAuth({
 	callbacks: {
 		// ROUTE HANDLER --- Callbacks --- session
 		// This callback is called whenever a session is checked, to know that the user is authenticated
-
+		async session({ session }) {
+			const sessionUser = await User.findOne({ email: session.user.email })
+			session.user.id = sessionUser._id.toString()
+			return session
+		},
 
 		// ROUTE HANDLER --- Callbacks --- signIn
 		// This callback is called when a user signs in
