@@ -13,9 +13,9 @@ const UserSchema = new Schema({
         required: [true, 'Email is required'],
         unique: [true, 'Email already exists'],
     },
+    // IMPORTANT: The password is "not required" here because we will use Google to sign in, and Google will not provide the password
     password: {
         type: String,
-        required: [true, 'Password is required'],
     },
     profileImagePath: {
         type: String,
@@ -29,7 +29,7 @@ const UserSchema = new Schema({
         type: Array,
         default: [],
     },
-    order: {
+    orders: {
         type: Array,
         default: [],
     },

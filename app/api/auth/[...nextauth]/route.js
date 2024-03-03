@@ -32,6 +32,8 @@ const handler = NextAuth({
 		}),
 	],
 
+	secret: process.env.NEXTAUTH_SECRET,
+
 	// ROUTE HANDLER --- Callbacks
 	callbacks: {
 		// ROUTE HANDLER --- Callbacks --- session
@@ -50,6 +52,13 @@ const handler = NextAuth({
 				try {
 					await connectToDatabase()
 
+					console.log("da vao signIn function")
+					console.log("GOOGLE_CLIENT_ID", process.env.GOOGLE_CLIENT_ID)
+					console.log("GOOGLE_CLIENT_SECRET", process.env.GOOGLE_CLIENT_SECRET)
+					console.log("NEXTAUTH_URL", process.env.NEXTAUTH_URL)
+					console.log("NEXTAUTH_SECRET", process.env.NEXTAUTH_SECRET)
+
+
 					// Check if the user exists in the database and if not, create a new user
 					let user = await User.findOne({ email: profile.email })
 
@@ -61,7 +70,7 @@ const handler = NextAuth({
 							profileImagePath: profile.picture,
 							wishlist: [],
 							cart: [],
-							order: [],
+							orders: [],
 							work: [],
 						})
 					}

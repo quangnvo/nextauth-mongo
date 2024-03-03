@@ -7,10 +7,6 @@ import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 
 const Register = () => {
-	// The "useRouter" hook is used to access the router object
-	const router = useRouter()
-
-
 	/*#################
 	# The follwing code is only for setup INITIAL VARIABLES
 	#################*/
@@ -23,6 +19,9 @@ const Register = () => {
 	})
 
 	const [isPasswordMatch, setIsPasswordMatch] = useState(true)
+
+	// The "useRouter" hook is used to access the router object
+	const router = useRouter()
 	/*#################
 	# End of setup INITIAL VARIABLES
 	#################*/
@@ -62,7 +61,6 @@ const Register = () => {
 	# End of FUNCTIONS --- handleChange
 	#################*/
 
-	console.log("formData ne: ", formData)
 
 	/*#################
 	# FUNCTIONS --- handleSubmit
@@ -79,24 +77,15 @@ const Register = () => {
 			for (let key in formData) {
 				registerForm.append(key, formData[key])
 			}
-
-			console.log("registerForm ne: ", registerForm)
-			console.log("registerForm ne: ", registerForm.get("username"))
-
-			const dummy = await fetch("https://dummyjson.com/products/1")
-			console.log("dummy ne: ", dummy)
-
 			// Then we send the POST request to the server to create a new user
 			const response = await fetch("http://localhost:3000//api/register/", {
 				method: "POST",
 				body: registerForm
 			})
-
 			// If the user is created successfully, we redirect the user to home page
 			if (response.ok) {
 				router.push("/")
 			}
-
 		} catch (error) {
 			console.log("Registration failed", error.message)
 		}
@@ -199,7 +188,7 @@ const Register = () => {
 						<p>Upload profile photo</p>
 					</label>
 
-					{/* Render the profile image after user uploaded */}
+					{/* Render the profile image after user uploaded at here*/}
 					{formData.profileImage && (
 						// The URL.createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter
 						<img
@@ -209,7 +198,7 @@ const Register = () => {
 						/>
 					)}
 
-					{/* Button Register */}
+					{/* Button Register (manually register)*/}
 					<button
 						type="submit"
 						// The button will be disabled if the password and confirmPassword are not the same
