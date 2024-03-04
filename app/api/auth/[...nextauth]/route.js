@@ -7,14 +7,21 @@ import User from "@models/User";
 import { connectToDatabase } from "@mongodb/database";
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { compare } from "bcryptjs";
 
 // The format of handler is followed by ROUTE HANDLER of NextAuth documentation at here: https://next-auth.js.org/configuration/initialization#route-handlers-app
 // So in the following handler, we need to export two handlers, one for GET and one for POST
 // Inside handler, we use providers to specify the authentication providers that we want to use
 // In this case, we use GoogleProvider to specify that we want to use Google authentication provider
 const handler = NextAuth({
-	// ROUTE HANDLER --- Providers
+	/*#################
+	# ROUTE HANDLER --- Providers
+	#################*/
 	providers: [
+		/*#################
+		# ROUTE HANDLER --- Providers --- GoogleProvider
+		#################*/
 		GoogleProvider({
 			// The clientId and clientSecret are the credentials that we get from the Google Cloud Console at https://console.cloud.google.com/
 			// We need to create a new project, then OAuth consent screen, then fill in the information, then at the API & Services, we create Credentials, then create OAuth client ID
@@ -30,8 +37,48 @@ const handler = NextAuth({
 				}
 			}
 		}),
+		/*#################
+		# End of ROUTE HANDLER --- Providers --- GoogleProvider
+		#################*/
+
+		/*#################
+		# ROUTE HANDLER --- Providers --- CredentialsProvider
+		#################*/
+		// This is the provider for the manual login
+		CredentialsProvider({
+			// The name to display on the sign in form (e.g. "Sign in with...")
+			name: "Credentials",
+			async authorize(credentials, req) {
+				await connectToDatabase()
+
+				// Check if the user exists in the database
+				const user = await User.findOne({ email: credentials.email })
+				if (!user) {
+					throw new Error("Invalid email or password")
+				}
+
+				// Check if the password is correct
+				// "user.password" is the hashed password that we get from the database
+				// "credentials.password" is the password that the user enters in the sign in form
+				const isMatch = await compare(credentials.password, user.password)
+				if (!isMatch) {
+					throw new Error("Invalid email or password")
+				}
+
+				// If the user exists and the password is correct, return the user
+				return user
+			}
+		}),
+		/*#################
+		# End of ROUTE HANDLER --- Providers --- CredentialsProvider
+		#################*/
+
+		/*#################
+		# ROUTE HANDLER --- Providers
+		#################*/
 	],
 
+	// This is important
 	secret: process.env.NEXTAUTH_SECRET,
 
 	// ROUTE HANDLER --- Callbacks

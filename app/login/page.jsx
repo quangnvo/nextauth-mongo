@@ -1,5 +1,9 @@
 "use client"
 
+/*#################
+# This login page link with the "Credential provider" in the nextauth, app/api/auth/[...nextauth]/routes.js
+#################*/
+
 import "@styles/Login.scss";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
