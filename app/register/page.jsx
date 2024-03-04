@@ -84,7 +84,7 @@ const Register = () => {
 			})
 			// If the user is created successfully, we redirect the user to home page
 			if (response.ok) {
-				router.push("/")
+				router.push("/login")
 			}
 		} catch (error) {
 			console.log("Registration failed", error.message)

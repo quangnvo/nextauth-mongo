@@ -81,31 +81,32 @@ const handler = NextAuth({
 	// This is important
 	secret: process.env.NEXTAUTH_SECRET,
 
-	// ROUTE HANDLER --- Callbacks
+	/*#################
+	# ROUTE HANDLER --- Callbacks
+	#################*/
 	callbacks: {
-		// ROUTE HANDLER --- Callbacks --- session
+		/*#################
+		# ROUTE HANDLER --- Callbacks --- session
+		#################*/
 		// This callback is called whenever a session is checked, to know that the user is authenticated
 		async session({ session }) {
 			const sessionUser = await User.findOne({ email: session.user.email })
 			session.user.id = sessionUser._id.toString()
 			return session
 		},
+		/*#################
+		# End of ROUTE HANDLER --- Callbacks --- session
+		#################*/
 
-		// ROUTE HANDLER --- Callbacks --- signIn
+		/*#################
+		# ROUTE HANDLER --- Callbacks --- signIn
+		#################*/
 		// This callback is called when a user signs in
 		async signIn({ account, profile }) {
 			// This check === "google" is to check if the user is signing in with Google, and in frontend, we also use signIn("google") to sign in with Google
 			if (account.provider === 'google') {
 				try {
 					await connectToDatabase()
-
-					console.log("da vao signIn function")
-					console.log("GOOGLE_CLIENT_ID", process.env.GOOGLE_CLIENT_ID)
-					console.log("GOOGLE_CLIENT_SECRET", process.env.GOOGLE_CLIENT_SECRET)
-					console.log("NEXTAUTH_URL", process.env.NEXTAUTH_URL)
-					console.log("NEXTAUTH_SECRET", process.env.NEXTAUTH_SECRET)
-
-
 					// Check if the user exists in the database and if not, create a new user
 					let user = await User.findOne({ email: profile.email })
 
@@ -129,7 +130,13 @@ const handler = NextAuth({
 			// This "return true" important, is to tell NextAuth that the user is authenticated
 			return true
 		},
+		/*#################
+		# End of ROUTE HANDLER --- Callbacks --- signIn
+		#################*/
 	}
+	/*#################
+	# End of ROUTE HANDLER --- Callbacks
+	#################*/
 })
 
 export { handler as GET, handler as POST }
