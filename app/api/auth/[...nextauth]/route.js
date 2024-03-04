@@ -92,6 +92,14 @@ const handler = NextAuth({
 		async session({ session }) {
 			const sessionUser = await User.findOne({ email: session.user.email })
 			session.user.id = sessionUser._id.toString()
+
+			// This is important
+			// The ...session.user is merge with the sessionUser._doc
+			// The "session.user" is the user object that we get from the session NextAuth
+			// The "sessionUser._doc" is the user object that we get from the MongoDB 
+			// If don't have this line, then the session.user will not have the information of the user from the MongoDB, which mean we don't have the profileImagePath, wishlist, cart, orders, work, etc.
+			session.user = { ...session.user, ...sessionUser._doc }
+
 			return session
 		},
 		/*#################
