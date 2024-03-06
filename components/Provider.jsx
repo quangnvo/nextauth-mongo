@@ -1,4 +1,4 @@
-// Here we need "use client" because it use the browser capacity
+// IMPORTANT: Here we need "use client" because it use the browser capacity
 "use client"
 
 /*#################

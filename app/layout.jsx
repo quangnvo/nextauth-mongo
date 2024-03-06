@@ -1,5 +1,6 @@
 import "@styles/globals.css"
 import Provider from "@components/Provider"
+import './globals.css'
 
 export const metadata = {
 	title: "Alatags",
@@ -8,7 +9,7 @@ export const metadata = {
 
 const layout = ({ children }) => {
 	return (
-		<html lang="en">
+		<html lang="en" data-theme="bumblebee">
 			<body>
 				<Provider>
 					<main>

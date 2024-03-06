@@ -52,14 +52,14 @@ const Login = () => {
 	#################*/
 
 	/*#################
-	# FUNCTIONS --- loginWithGoogle
+	# FUNCTIONS --- signInWithGoogle
 	#################*/
-	const loginWithGoogle = async () => {
+	const signInWithGoogle = () => {
 		// The "callbackUrl" is the URL that the user will be redirected to after the login is successful. This is already have in the signIn function
 		signIn("google", { callbackUrl: "/" })
 	}
 	/*#################
-	# End of FUNCTIONS --- loginWithGoogle
+	# End of FUNCTIONS --- signInWithGoogle
 	#################*/
 
 	return (
@@ -99,10 +99,10 @@ const Login = () => {
 				</form>
 
 				{/* Button Login with Google */}
-				{/* This Login button here, we can go to the Register page and copy the function loginWithGoogle() to use here */}
+				{/* This Login button here, we can go to the Register page and copy the function signInWithGoogle() to use here */}
 				<button
 					className="google"
-					onClick={loginWithGoogle}
+					onClick={signInWithGoogle}
 				>
 					<p>Login with Google</p>
 					<FcGoogle />

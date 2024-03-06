@@ -20,7 +20,6 @@ export const connectToDatabase = async () => {
         await mongoose.connect(process.env.MONGODB_URL, {
             // The "dbName" here is the name of the app, like "alatags"
             dbName: "artify",
-
             // The "useNewUrlParser" and "useUnifiedTopology" are configuration settings for Mongoose
             // Setting "useNewUrlParser" to true means that Mongoose will use the MongoDB driver's new connection management engine.This option tells Mongoose to use the new MongoDB Node.js driver’s new URL string parser instead of the deprecated one. The new parser is more secure and provides better performance.
             // useUnifiedTopology: true is a configuration setting for Mongoose, this option is related to how Mongoose handles MongoDB server topology. Setting this to true opts in to using the MongoDB driver’s new connection management engine. It’s designed to correctly handle all aspects of server discovery and monitoring, helping to prevent issues related to topology changes.

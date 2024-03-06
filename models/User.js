@@ -1,4 +1,7 @@
-// User.js
+/*###############
+# This file used for the User model in the MongoDB database.
+# The User model is made by mongoose
+###############*/
 
 import { Schema, model, models } from 'mongoose';
 
@@ -39,7 +42,7 @@ const UserSchema = new Schema({
     },
 })
 
-// This is first look at the models, if the model "User" already exists, it will not be created again. Otherwise, it will be created by using the UserSchema and named "User".
+// If the model "User" already exists, it will not be created again. Otherwise, it will be created by using the UserSchema and named "User".
 const User = models.User || model('User', UserSchema);
 
 export default User;
