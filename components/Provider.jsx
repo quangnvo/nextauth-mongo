@@ -2,7 +2,7 @@
 "use client"
 
 /*#################
-# Create a Provider component for using NextAuth
+# Create a Provider component for using NextAuth, like Google Auth, then use it in the file app/layout.jsx
 #################*/
 
 import { SessionProvider } from 'next-auth/react'

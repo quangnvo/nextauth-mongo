@@ -3,9 +3,11 @@
 - This file is followed the Route Handler of NextAuth documentation at here: https://next-auth.js.org/configuration/initialization#route-handlers-app
 ################ */
 
+import NextAuth from "next-auth"
+// Import the User model from the MongoDB
 import User from "@models/User";
 import { connectToDatabase } from "@mongodb/database";
-import NextAuth from "next-auth"
+// Import the GoogleProvider
 import GoogleProvider from "next-auth/providers/google";
 
 // The format of handler is followed by ROUTE HANDLER of NextAuth documentation at here: https://next-auth.js.org/configuration/initialization#route-handlers-app
@@ -55,6 +57,7 @@ const handler = NextAuth({
 		# ROUTE HANDLER --- Callbacks --- signIn
 		#################*/
 		// This callback is called when a user signs in
+		// "account" and "profile" are already provided by NextAuth
 		async signIn({ account, profile }) {
 			// This check === "google" is to check if the user is signing in with Google, and in frontend, we also use signIn("google") to sign in with Google
 			// The "profile" here is all the information that we get from the Google profile
@@ -62,7 +65,13 @@ const handler = NextAuth({
 				try {
 					await connectToDatabase()
 					// Check if the user exists in the database and if not, create a new user
+
+					console.log("🧑 profile: ", profile)
+					console.log("🧑 profile.email: ", profile.email)
+
 					let user = await User.findOne({ email: profile.email })
+
+
 
 					// This part is to create new user in the MongoDB based on the Google profile
 					if (!user) {
@@ -77,6 +86,7 @@ const handler = NextAuth({
 							work: [],
 						})
 					}
+					console.log("🧑 user: ", user)
 					return user
 				} catch (err) {
 					console.log(err)
