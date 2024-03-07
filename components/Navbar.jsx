@@ -73,7 +73,6 @@ const Navbar = () => {
 				{/* If user not login yet, then render the Login and Sign up dropdown*/}
 				{dropDownMenu && !user && (
 					<div className="navbar_right_accountmenu">
-						<Link href="/login">Login</Link>
 						<Link href="/register">Sign Up</Link>
 					</div>
 				)}
