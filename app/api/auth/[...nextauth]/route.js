@@ -71,13 +71,11 @@ const handler = NextAuth({
 
 					let user = await User.findOne({ email: profile.email })
 
-
-
 					// This part is to create new user in the MongoDB based on the Google profile
 					if (!user) {
 						user = await User.create({
 							email: profile.email,
-							username: profile.name,
+							name: profile.name,
 							// In the Google profile, the "picture" is the profile image of the user. This call "picture" but not "image" because it is the name of the field in the Google profile
 							profileImagePath: profile.picture,
 							wishlist: [],
@@ -86,7 +84,6 @@ const handler = NextAuth({
 							work: [],
 						})
 					}
-					console.log("🧑 user: ", user)
 					return user
 				} catch (err) {
 					console.log(err)

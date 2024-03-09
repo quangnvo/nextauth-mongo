@@ -6,23 +6,12 @@
 import { Schema, model, models } from 'mongoose';
 
 const UserSchema = new Schema({
-    username: {
-        type: String,
-        required: [true, 'Username is required'],
-        unique: [true, 'Username already exists'],
-    },
     email: {
         type: String,
-        required: [true, 'Email is required'],
-        unique: [true, 'Email already exists'],
-    },
-    // IMPORTANT: The password is "not required" here because we will use Google to sign in, and Google will not provide the password
-    password: {
-        type: String,
+        unique: true,
     },
     profileImagePath: {
         type: String,
-        required: [true, 'Profile image is required'],
     },
     wishlist: {
         type: Array,
