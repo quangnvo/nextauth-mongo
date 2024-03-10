@@ -10,7 +10,7 @@ import { signIn } from "next-auth/react"
 import { Button } from "@components/ui/button"
 
 
-const Register = () => {
+const Login = () => {
 	const signInWithGoogle = () => {
 		signIn("google", { callbackUrl: "/" })
 	}
@@ -34,7 +34,6 @@ const Register = () => {
 					<p className="mr-2">Login with Google</p>
 					<FcGoogle />
 				</Button>
-
 			</div>
 		</div>
 	)
@@ -43,4 +42,4 @@ const Register = () => {
 # End of RETURN FINAL UI
 #################*/
 
-export default Register
+export default Login
