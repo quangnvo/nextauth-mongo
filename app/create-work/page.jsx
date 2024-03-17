@@ -21,6 +21,20 @@ const CreateWork = () => {
 	# End of VARIABLES
 	################*/
 
+	/*################
+	# FUNCTIONS
+	################*/
+
+	// This handleSubmit function will be passed to the "Form" component as a prop.
+	const handleSubmit = (e) => {
+
+	}
+
+	/*################
+	# End of FUNCTIONS
+	################*/
+
+
 	return (
 		<>
 			<Navbar />
@@ -32,6 +46,8 @@ const CreateWork = () => {
 				type="Create"
 				work={work}
 				setWork={setWork}
+				// handleSubmit outside is the name, and handleSubmit inside is the function.
+				handleSubmit={handleSubmit}
 			/>
 		</>
 	)

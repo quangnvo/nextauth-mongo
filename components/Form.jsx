@@ -233,6 +233,7 @@ const Form = ({ type, work, setWork, handleSubmit }) => {
 	return (
 		<div className="form">
 			<h1>{type} Your Work</h1>
+			{/* The handleSubmit is passed from the CreateWork */}
 			<form onSubmit={handleSubmit}>
 
 				<h3>Which of these categories best describes your work?</h3>
