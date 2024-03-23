@@ -6,7 +6,7 @@
 import NextAuth from "next-auth"
 // Import the User model from the MongoDB
 import User from "@models/User";
-import { connectToDatabase } from "@mongodb/database";
+import { connectToDB } from "@mongodb/database";
 // Import the GoogleProvider
 import GoogleProvider from "next-auth/providers/google";
 
@@ -63,7 +63,7 @@ const handler = NextAuth({
 			// The "profile" here is all the information that we get from the Google profile
 			if (account.provider === 'google') {
 				try {
-					await connectToDatabase()
+					await connectToDB()
 					// Check if the user exists in the database and if not, create a new user
 
 					console.log("🧑 profile: ", profile)

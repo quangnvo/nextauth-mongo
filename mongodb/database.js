@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 let isConnected = false;
 
 // This function is used to connect to the MongoDB database
-export const connectToDatabase = async () => {
+export const connectToDB = async () => {
 
     // The line mongoose.set("strictQuery", true); is a configuration setting for Mongoose
     // Setting "strictQuery" to true means that Mongoose will filter out any fields in a query that are not in the schema. This can be useful to prevent unexpected behavior when querying your database.
